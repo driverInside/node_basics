@@ -1,0 +1,17 @@
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+GET http://{{host}}/books
+Content-Type:{{contentType}}
+
+###
+
+POST http://{{host}}/books/45?p=1uD1&promo_name=spring
+Content-Type:{{contentType}}
+
+{
+    "name": "Joe",
+    "permissions": "author"
+}

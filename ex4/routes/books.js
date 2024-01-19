@@ -38,4 +38,13 @@ router.get('/books', (req, res) => {
   res.send(books);
 });
 
+router.post('/books/:id', (req, res) => {
+  res.send({
+    body: req.body,
+    headers: req.headers,
+    query: req.query,
+    params: req.params
+  });
+});
+
 module.exports = router;
