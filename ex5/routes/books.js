@@ -3,6 +3,7 @@ const router = express.Router();
 
 const books = [
   {
+    "id": 123,
     "author": "Paul Celan",
     "country": "Romania, France",
     "imageLink": "images/poems-paul-celan.jpg",
@@ -13,6 +14,7 @@ const books = [
     "year": 1952
   },
   {
+    "id": 456,
     "author": "Louis-Ferdinand C\u00e9line",
     "country": "France",
     "imageLink": "images/voyage-au-bout-de-la-nuit.jpg",
@@ -23,6 +25,7 @@ const books = [
     "year": 1932
   },
   {
+    "id": 789,
     "author": "Miguel de Cervantes",
     "country": "Spain",
     "imageLink": "images/don-quijote-de-la-mancha.jpg",
@@ -34,12 +37,54 @@ const books = [
   }
 ];
 
+router.get('/books/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  let book;
+
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].id === id) {
+      book = books[i];
+      break;
+    }
+  }
+
+  if(!book) {
+    res.statusCode = 404;
+    return res.send({
+      message: 'No, mi ciela'
+    });
+  }
+
+  res.send(book);
+});
+
 router.get('/books', (req, res) => {
   res.send(books);
 });
 
 router.post('/books', (req, res) => {
+  const book = req.body;
 
-})
+  books.push(book);
+  res.send(book);
+});
+
+router.delete('/books/:id', (req, res) => {
+  // 1. Buscar el elemento que se quiere eliminar
+  // 2. Removerlo del arreglo
+  // 3. Recorrer los elementos restantes
+
+  const id = parseInt(req.params.id, 10);
+  let index;
+
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].id === id) {
+      index = i;
+      break;
+    }
+  }
+
+  res.send({index});
+});
 
 module.exports = router;

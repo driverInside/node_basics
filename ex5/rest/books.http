@@ -1,0 +1,32 @@
+@hostname = localhost
+@port = 5000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+GET http://{{host}}/books
+Content-Type:{{contentType}}
+
+###
+
+POST http://{{host}}/books/
+Content-Type:{{contentType}}
+
+{
+    "id": 159,
+    "author": "Andy Vicker",
+    "country": "Canada, Spain",
+    "imageLink": "images/poems-paul-celan.jpg",
+    "language": "Chinese",
+    "link": "\n",
+    "pages": 420,
+    "title": "Algorithms",
+    "year": 1978
+}
+
+###
+GET http://{{host}}/books/1289
+Content-Type:{{contentType}}
+
+###
+DELETE http://{{host}}/books/1
+Content-Type:{{contentType}}
